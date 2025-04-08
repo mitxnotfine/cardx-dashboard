@@ -1,150 +1,169 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>CardX Dashboard</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>CardX Control Dashboard</title>
   <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-      font-family: 'Segoe UI', sans-serif;
-    }
     body {
-      background: radial-gradient(circle at top left, #0f0f0f, #000);
+      margin: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(to right, #0f2027, #203a43, #2c5364);
       color: white;
-      padding: 2rem;
-    }
-    h1 {
-      font-size: 2.5rem;
-      text-align: center;
-      margin-bottom: 1rem;
-    }
-    .fingerprint {
       display: flex;
-      justify-content: center;
-      margin-bottom: 2rem;
-    }
-    .fingerprint button {
-      width: 100px;
-      height: 100px;
-      border-radius: 50%;
-      border: 2px solid #00f2ff;
-      background: #111;
-      color: #00f2ff;
-      font-size: 2rem;
-      cursor: pointer;
-      transition: all 0.3s ease;
-    }
-    .fingerprint button:hover {
-      background: #00f2ff;
-      color: black;
-    }
-    .categories {
-      display: none;
-      justify-content: center;
-      gap: 1rem;
-      margin-bottom: 2rem;
-      animation: fadeIn 1s ease forwards;
-    }
-    .categories button {
-      padding: 0.75rem 1.5rem;
-      border-radius: 12px;
-      border: none;
-      background: #111;
-      color: white;
-      font-size: 1rem;
-      cursor: pointer;
-      box-shadow: 0 0 10px rgba(0, 242, 255, 0.2);
-    }
-    .categories button:hover {
-      background: #00f2ff;
-      color: black;
-    }
-    .cards {
-      display: none;
       flex-direction: column;
-      gap: 1rem;
-    }
-    .card {
-      background: rgba(255, 255, 255, 0.05);
-      border: 1px solid rgba(255, 255, 255, 0.1);
-      padding: 1rem;
-      border-radius: 16px;
-      backdrop-filter: blur(10px);
-      box-shadow: 0 0 30px rgba(0, 242, 255, 0.1);
-    }
-    .controls {
-      margin-top: 1rem;
-      display: flex;
-      gap: 1rem;
+      align-items: center;
       justify-content: center;
+      height: 100vh;
     }
-    .controls button {
-      padding: 0.5rem 1rem;
-      background: #111;
-      color: white;
-      border-radius: 8px;
-      border: none;
+
+    .dashboard {
+      background: rgba(255, 255, 255, 0.05);
+      border-radius: 20px;
+      padding: 2rem;
+      width: 90%;
+      max-width: 600px;
+      backdrop-filter: blur(20px);
+      box-shadow: 0 0 40px rgba(0, 255, 255, 0.2);
+    }
+
+    .fingerprint {
+      width: 60px;
+      height: 60px;
+      margin: auto;
+      background: radial-gradient(circle, #00ffff55 20%, transparent 70%);
+      border-radius: 50%;
       cursor: pointer;
+      animation: pulse 2s infinite;
     }
-    .controls button:hover {
-      background: red;
+
+    @keyframes pulse {
+      0% {
+        box-shadow: 0 0 0 0 rgba(0, 255, 255, 0.7);
+      }
+      70% {
+        box-shadow: 0 0 0 30px rgba(0, 255, 255, 0);
+      }
+      100% {
+        box-shadow: 0 0 0 0 rgba(0, 255, 255, 0);
+      }
     }
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(10px); }
-      to { opacity: 1; transform: translateY(0); }
+
+    .section {
+      margin-top: 2rem;
+      display: none;
+    }
+
+    .section.active {
+      display: block;
+    }
+
+    .card-list {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .card {
+      background: rgba(255, 255, 255, 0.1);
+      padding: 1rem;
+      border-radius: 12px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      box-shadow: 0 2px 8px rgba(0, 255, 255, 0.1);
+    }
+
+    .btn {
+      padding: 0.5rem 1rem;
+      background: #00ffff;
+      color: #000;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+
+    .btn:hover {
+      background: #00cccc;
     }
   </style>
 </head>
 <body>
-  <h1>CardX Control Hub</h1>
-  <div class="fingerprint">
-    <button onclick="unlockDashboard()">🔓</button>
+  <div class="dashboard">
+    <div class="fingerprint" onclick="unlock()"></div>
+
+    <div id="menu" class="section">
+      <h2>Select Card Type</h2>
+      <button class="btn" onclick="showSection('debit')">Debit Cards</button>
+      <button class="btn" onclick="showSection('credit')">Credit Cards</button>
+      <button class="btn" onclick="showSection('other')">Other Cards</button>
+    </div>
+
+    <div id="debit" class="section">
+      <h3>Debit Cards</h3>
+      <div class="card-list">
+        <div class="card">
+          <span>ICICI Bank</span>
+          <button class="btn" onclick="blockCard(this)">Block</button>
+        </div>
+        <div class="card">
+          <span>HDFC Bank</span>
+          <button class="btn" onclick="blockCard(this)">Block</button>
+        </div>
+      </div>
+    </div>
+
+    <div id="credit" class="section">
+      <h3>Credit Cards</h3>
+      <div class="card-list">
+        <div class="card">
+          <span>American Express</span>
+          <button class="btn" onclick="blockCard(this)">Block</button>
+        </div>
+        <div class="card">
+          <span>Axis Bank</span>
+          <button class="btn" onclick="blockCard(this)">Block</button>
+        </div>
+      </div>
+    </div>
+
+    <div id="other" class="section">
+      <h3>Other Cards</h3>
+      <div class="card-list">
+        <div class="card">
+          <span>Delhi Metro</span>
+          <button class="btn" onclick="blockCard(this)">Block</button>
+        </div>
+        <div class="card">
+          <span>Timezone Arcade</span>
+          <button class="btn" onclick="blockCard(this)">Block</button>
+        </div>
+      </div>
+    </div>
   </div>
-  <div class="categories" id="categories">
-    <button onclick="showCards('debit')">Debit Cards</button>
-    <button onclick="showCards('credit')">Credit Cards</button>
-    <button onclick="showCards('other')">Other Cards</button>
-  </div>
-  <div class="cards" id="cards"></div>
+
   <script>
-    const allCards = {
-      debit: [
-        { name: "HDFC Debit", balance: "₹7,520" },
-        { name: "ICICI Debit", balance: "₹12,320" },
-      ],
-      credit: [
-        { name: "Amex Gold", balance: "₹30,000 limit" },
-        { name: "SBI Credit", balance: "₹10,000 limit" },
-      ],
-      other: [
-        { name: "Delhi Metro", balance: "₹80" },
-        { name: "Timezone Arcade", balance: "₹150" },
-      ]
-    };
-
-    function unlockDashboard() {
-      document.getElementById('categories').style.display = 'flex';
+    function unlock() {
+      document.querySelector('.fingerprint').style.display = 'none';
+      document.getElementById('menu').classList.add('active');
     }
 
-    function showCards(type) {
-      const cards = allCards[type];
-      const container = document.getElementById('cards');
-      container.innerHTML = '';
-      cards.forEach((card, index) => {
-        const div = document.createElement('div');
-        div.className = 'card';
-        div.innerHTML = `<strong>${card.name}</strong><br>${card.balance}<div class="controls"><button onclick="blockCard('${type}', ${index})">Block</button></div>`;
-        container.appendChild(div);
+    function showSection(id) {
+      document.querySelectorAll('.section').forEach((sec) => {
+        if (sec.id === id || sec.id === 'menu') {
+          sec.classList.add('active');
+        } else {
+          sec.classList.remove('active');
+        }
       });
-      container.style.display = 'flex';
     }
 
-    function blockCard(type, index) {
-      allCards[type][index].balance = '❌ BLOCKED';
-      showCards(type);
+    function blockCard(btn) {
+      const card = btn.parentElement;
+      card.querySelector('span').innerText += ' [BLOCKED]';
+      btn.disabled = true;
+      btn.innerText = 'Blocked';
     }
   </script>
 </body>
