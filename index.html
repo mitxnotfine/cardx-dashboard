@@ -3,195 +3,136 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>CardX // Executive Control</title>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet" />
+  <title>CardX – One Card, Infinite Possibilities</title>
+  <link rel="stylesheet" href="style.css" />
   <style>
-    :root {
-      --bg: #0d0d0d;
-      --card: #1a1a1a;
-      --glass: rgba(255, 255, 255, 0.05);
-      --accent: #00ffff;
-      --text: #f1f1f1;
-      --danger: #ff4d4d;
-    }
-
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-      font-family: 'Inter', sans-serif;
-    }
-
-    body {
-      background: var(--bg);
-      color: var(--text);
-      padding: 2rem;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-    }
-
-    header {
-      text-align: center;
-      font-size: 2.2rem;
-      font-weight: 800;
-      background: linear-gradient(90deg, #0ff, #00f7ff, #00e0ff);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      margin-bottom: 2rem;
-    }
-
     .fingerprint {
-      width: 100px;
-      height: 100px;
+      width: 60px;
+      height: 60px;
+      margin: 20px auto;
+      background: radial-gradient(circle, #00f2ff 30%, #001f2f);
       border-radius: 50%;
-      border: 3px solid var(--accent);
+      cursor: pointer;
+      animation: pulse 2s infinite;
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 2rem;
-      background: linear-gradient(145deg, #111, #222);
-      cursor: pointer;
-      transition: all 0.3s ease;
-      box-shadow: 0 0 20px var(--accent);
-      margin-bottom: 2rem;
+      transition: transform 0.3s ease;
     }
 
-    .menu {
-      display: none;
-      flex-direction: column;
-      gap: 1rem;
-      animation: fadeIn 0.6s ease-in-out forwards;
+    .fingerprint:active {
+      transform: scale(0.95);
+      background: radial-gradient(circle, #00ffff 40%, #003a4d);
     }
 
-    .menu button {
-      padding: 1rem 2rem;
-      border: none;
-      background: var(--glass);
-      border-radius: 14px;
-      color: var(--text);
-      font-size: 1.1rem;
-      font-weight: 600;
-      backdrop-filter: blur(12px);
-      border: 1px solid rgba(255,255,255,0.1);
-      transition: 0.3s ease;
-      box-shadow: inset 0 0 0 0 var(--accent);
-    }
-
-    .menu button:hover {
-      background: var(--accent);
-      color: #000;
-      box-shadow: inset 0 0 20px #00ffffaa;
-    }
-
-    .card-container {
-      margin-top: 2rem;
-      display: none;
-      gap: 1rem;
-      flex-direction: column;
-      width: 100%;
-      max-width: 600px;
-    }
-
-    .card {
-      background: var(--glass);
-      padding: 1rem 1.5rem;
-      border-radius: 16px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      border: 1px solid rgba(255,255,255,0.08);
-      backdrop-filter: blur(14px);
-      box-shadow: 0 0 25px #00ffff15;
-      transition: 0.3s ease;
-    }
-
-    .card:hover {
-      transform: scale(1.01);
-    }
-
-    .card strong {
-      font-weight: 600;
-      font-size: 1.1rem;
-    }
-
-    .btn {
-      background: var(--accent);
-      border: none;
-      padding: 0.5rem 1rem;
-      border-radius: 8px;
-      color: #000;
-      font-weight: bold;
-      cursor: pointer;
-    }
-
-    .btn:hover {
-      background: #00dddd;
-    }
-
-    @keyframes fadeIn {
-      from {
-        opacity: 0;
-        transform: translateY(10px);
+    @keyframes pulse {
+      0% {
+        box-shadow: 0 0 0 0 rgba(0, 255, 255, 0.4);
       }
-      to {
-        opacity: 1;
-        transform: translateY(0);
+      70% {
+        box-shadow: 0 0 0 25px rgba(0, 255, 255, 0);
+      }
+      100% {
+        box-shadow: 0 0 0 0 rgba(0, 255, 255, 0);
       }
     }
   </style>
 </head>
 <body>
-  <header>CARDX // EXECUTIVE CONTROL</header>
-  <div class="fingerprint" onclick="unlock()">🔒</div>
+  <div class="hero">
+    <nav>
+      <h1 class="logo">CardX</h1>
+    </nav>
+    <div class="hero-content">
+      <div class="text">
+        <h2>Revolutionize Your Wallet</h2>
+        <p>The world’s first universal smart card – secure, customizable, and interactive. Replace all your cards with one ultra-premium, fingerprint-authenticated device. Tap. Switch. Unlock.</p>
+        <button onclick="scrollToModel()">See it in action</button>
+      </div>
 
-  <div class="menu" id="menu">
-    <button onclick="showCards('debit')">💳 Debit Cards</button>
-    <button onclick="showCards('credit')">💰 Credit Cards</button>
-    <button onclick="showCards('other')">🎟 Other Cards</button>
+      <div class="card-container">
+        <div class="card">
+          <div class="screen">
+            <h3 id="card-name">🔒</h3>
+            <p id="card-balance">Fingerprint to Unlock</p>
+          </div>
+          <div class="fingerprint" onclick="unlockCard()">🔓</div>
+        </div>
+        <div class="switch-btn" style="display:none; gap: 0.5rem; flex-direction: column; align-items: center;" id="card-options">
+          <button onclick="selectType('debit')">💳 Debit</button>
+          <button onclick="selectType('credit')">💰 Credit</button>
+          <button onclick="selectType('other')">🎟 Other</button>
+        </div>
+        <button class="switch-btn" style="display:none;" onclick="switchCard()" id="switchBtn">Switch Card</button>
+      </div>
+    </div>
   </div>
 
-  <div class="card-container" id="cards"></div>
+  <section class="features" id="features">
+    <h3>🧠 Smart Features</h3>
+    <div class="cards">
+      <div class="feature-card">
+        <h4>🔐 Biometric Security</h4>
+        <p>Authenticate instantly with your fingerprint – ultra-secure access for every transaction.</p>
+      </div>
+      <div class="feature-card">
+        <h4>📟 Dynamic Display</h4>
+        <p>See card info, offers, and balances on a responsive mini-screen built into the device.</p>
+      </div>
+      <div class="feature-card">
+        <h4>🌀 Tactile Switch Dial</h4>
+        <p>Swipe between stored cards using a rotating ring-inspired interface. Smooth. Premium.</p>
+      </div>
+      <div class="feature-card">
+        <h4>📶 NFC & RFID Ready</h4>
+        <p>Tap to pay, enter transport gates, or scan into events – all with one powerful card.</p>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <p>Crafted with 💗 by Team CardX for the Hackathon</p>
+  </footer>
 
   <script>
-    const cards = [
-      { type: 'debit', name: 'ICICI Debit', info: '₹7,520' },
-      { type: 'debit', name: 'Axis Bank', info: '₹12,300' },
-      { type: 'credit', name: 'Amex Gold', info: '₹1.5L Limit' },
-      { type: 'credit', name: 'HDFC Credit', info: '₹45,000 Used' },
-      { type: 'other', name: 'Delhi Metro', info: '₹100 Balance' },
-      { type: 'other', name: 'Arcade Rush', info: '15 Tokens' },
-    ];
+    const cardData = {
+      debit: [
+        { name: "ICICI Debit", balance: "₹7,520", blocked: false },
+        { name: "Axis Bank", balance: "₹12,300", blocked: false }
+      ],
+      credit: [
+        { name: "Amex Gold", balance: "₹1.5L Limit", blocked: false },
+        { name: "HDFC Credit", balance: "₹45,000 Used", blocked: false }
+      ],
+      other: [
+        { name: "Delhi Metro", balance: "₹100 Balance", blocked: false },
+        { name: "Arcade Rush", balance: "15 Tokens", blocked: false }
+      ]
+    };
 
-    function unlock() {
-      document.querySelector('.fingerprint').style.display = 'none';
-      document.getElementById('menu').style.display = 'flex';
+    let selectedType = null;
+    let currentIndex = 0;
+
+    function unlockCard() {
+      document.getElementById("card-name").innerText = "🔓 Unlocked";
+      document.getElementById("card-balance").innerText = "Select a category";
+      document.getElementById("card-options").style.display = "flex";
     }
 
-    function showCards(type) {
-      const container = document.getElementById('cards');
-      container.innerHTML = '';
-      const filtered = cards.filter(c => c.type === type);
-
-      filtered.forEach(card => {
-        const div = document.createElement('div');
-        div.className = 'card';
-        div.innerHTML = `
-          <div>
-            <strong>${card.name}</strong>
-            <p>${card.info}</p>
-          </div>
-          <button class="btn" onclick="blockCard(this)">Block</button>
-        `;
-        container.appendChild(div);
-      });
-      container.style.display = 'flex';
+    function selectType(type) {
+      selectedType = type;
+      currentIndex = 0;
+      document.getElementById("card-options").style.display = "none";
+      document.getElementById("switchBtn").style.display = "inline-block";
+      switchCard();
     }
 
-    function blockCard(btn) {
-      btn.innerText = 'Blocked';
-      btn.style.background = 'var(--danger)';
-      btn.disabled = true;
+    function switchCard() {
+      if (!selectedType || !cardData[selectedType].length) return;
+      const card = cardData[selectedType][currentIndex];
+      document.getElementById("card-name").innerText = card.name;
+      document.getElementById("card-balance").innerText = card.blocked ? "❌ BLOCKED" : card.balance;
+      currentIndex = (currentIndex + 1) % cardData[selectedType].length;
     }
   </script>
 </body>
