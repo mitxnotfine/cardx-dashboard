@@ -6,11 +6,20 @@
 }
 
 body {
-  font-family: 'Segoe UI', sans-serif;
-  background-color: #0d0d0d;
-  color: #ffffff;
-  line-height: 1.6;
+  font-family: 'Poppins', sans-serif;
+  background: linear-gradient(120deg, #090c10, #0b1f2a, #0d2e3f);
+  background-size: 400% 400%;
+  animation: animateGradient 15s ease infinite;
+  color: #fff;
+  margin: 0;
 }
+
+@keyframes animateGradient {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
 
 nav {
   padding: 2rem;
