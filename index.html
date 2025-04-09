@@ -1,80 +1,63 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>CardX – One Card, Infinite Possibilities</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
-  <style>
-    @import url('style.css');
-  </style>
-  <style>
-    body {
-      font-family: 'Poppins', sans-serif;
-      background: linear-gradient(to bottom right, #090c10, #0b1f2a);
-      color: #fff;
-      transition: background 0.5s ease;
-    }
-
-    .card {
-      perspective: 1000px;
-      position: relative;
-    }
-
-    .card .screen {
-      width: 280px;
-      height: 160px;
-      background: linear-gradient(145deg, #111926, #0a0f1a);
-      border-radius: 16px;
-      box-shadow: 0 15px 30px rgba(0,0,0,0.3);
-      color: white;
-      padding: 1.5rem;
-      text-align: center;
-      transform-style: preserve-3d;
-      transition: transform 0.7s ease-in-out;
-      backface-visibility: hidden;
-    }
-
-    .card.flipped .screen {
-      transform: rotateY(180deg);
-    }
-
-    .fingerprint {
-      width: 60px;
-      height: 60px;
-      margin: 20px auto;
-      background: radial-gradient(circle, #00f2ff 30%, #001f2f);
-      border-radius: 50%;
-      cursor: pointer;
-      animation: pulse 2s infinite;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      transition: transform 0.3s ease;
-      box-shadow: 0 0 12px #00f2ff99;
-    }
-
-    .fingerprint:active {
-      transform: scale(0.95);
-      background: radial-gradient(circle, #00ffff 40%, #003a4d);
-    }
-
-    @keyframes pulse {
-      0% {
-        box-shadow: 0 0 0 0 rgba(0, 255, 255, 0.4);
-      }
-      70% {
-        box-shadow: 0 0 0 25px rgba(0, 255, 255, 0);
-      }
-      100% {
-        box-shadow: 0 0 0 0 rgba(0, 255, 255, 0);
-      }
-    }
-  </style>
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-  <!-- Body content remains unchanged -->
+  <div class="hero">
+    <nav>
+      <h1 class="logo">CardX</h1>
+    </nav>
+    <div class="hero-content">
+      <div class="text">
+        <h2>Revolutionize Your Wallet</h2>
+        <p>The world’s first universal smart card – secure, customizable, and interactive. Replace all your cards with one ultra-premium, fingerprint-authenticated device. Tap. Switch. Unlock.</p>
+        <button onclick="scrollToModel()">See it in action</button>
+      </div>
+
+      <div class="card-container">
+        <div class="card">
+          <div class="screen">
+            <h3 id="card-name">HDFC Platinum</h3>
+            <p id="card-balance">₹7,200.00</p>
+          </div>
+          <div class="fingerprint" onclick="switchCard()"></div>
+        </div>
+        <button class="switch-btn" onclick="switchCard()">Switch Card</button>
+      </div>
+    </div>
+  </div>
+
+  <section class="features" id="features">
+    <h3>🧠 Smart Features</h3>
+    <div class="cards">
+      <div class="feature-card">
+        <h4>🔐 Biometric Security</h4>
+        <p>Authenticate instantly with your fingerprint – ultra-secure access for every transaction.</p>
+      </div>
+      <div class="feature-card">
+        <h4>📟 Dynamic Display</h4>
+        <p>See card info, offers, and balances on a responsive mini-screen built into the device.</p>
+      </div>
+      <div class="feature-card">
+        <h4>🌀 Tactile Switch Dial</h4>
+        <p>Swipe between stored cards using a rotating ring-inspired interface. Smooth. Premium.</p>
+      </div>
+      <div class="feature-card">
+        <h4>📶 NFC & RFID Ready</h4>
+        <p>Tap to pay, enter transport gates, or scan into events – all with one powerful card.</p>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <p>Crafted with 💗 by Team CardX for the Hackathon</p>
+  </footer>
+
+  <script src="script.js"></script>
 </body>
 </html>
