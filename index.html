@@ -1,75 +1,30 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>CardX – One Card, Infinite Possibilities</title>
-  <link rel="stylesheet" href="style.css" />
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&family=Playfair+Display:wght@600&display=swap" rel="stylesheet">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CardX</title>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <!-- Opening Overlay -->
-  <div class="opening-overlay">
-    <h1>Initializing CardX...</h1>
-  </div>
+  <div class="container">
+    <h1>CardX Universal Smart Card</h1>
 
-  <!-- Main UI -->
-  <div class="hero">
-    <nav>
-      <h1 class="logo">CardX</h1>
-    </nav>
-    <div class="hero-content">
-      <div class="text">
-        <h2>Revolutionize Your Wallet</h2>
-        <p>The world’s first universal smart card – secure, customizable, and interactive. Replace all your cards with one ultra-premium, fingerprint-authenticated device. Tap. Switch. Unlock.</p>
-        <button onclick="scrollToModel()">See it in action</button>
-      </div>
-
-      <div class="card-container">
-        <div class="card" id="flipCard">
-          <div class="screen">
-            <h3 id="card-name">🔒</h3>
-            <p id="card-balance">Fingerprint to Unlock</p>
-          </div>
-          <div class="fingerprint" onclick="unlockCard()">🔓</div>
-        </div>
-        <div class="switch-btn" id="card-options" style="display:none; gap: 0.5rem; flex-direction: column; align-items: center;">
-          <button onclick="selectType('debit')">💳 Debit</button>
-          <button onclick="selectType('credit')">💰 Credit</button>
-          <button onclick="selectType('other')">🎟 Other</button>
-        </div>
-        <button class="switch-btn" id="switchBtn" style="display:none;">Switch Card</button>
-      </div>
+    <div class="card-screen">
+      <h2 id="card-name">🔒</h2>
+      <p id="card-balance">Touch to Unlock</p>
     </div>
-  </div>
 
-  <section class="features" id="features">
-    <h3>🧠 Smart Features</h3>
-    <div class="cards">
-      <div class="feature-card">
-        <h4>🔐 Biometric Security</h4>
-        <p>Authenticate instantly with your fingerprint – ultra-secure access for every transaction.</p>
-      </div>
-      <div class="feature-card">
-        <h4>📟 Dynamic Display</h4>
-        <p>See card info, offers, and balances on a responsive mini-screen built into the device.</p>
-      </div>
-      <div class="feature-card">
-        <h4>🌀 Tactile Switch Dial</h4>
-        <p>Swipe between stored cards using a rotating ring-inspired interface. Smooth. Premium.</p>
-      </div>
-      <div class="feature-card">
-        <h4>📶 NFC & RFID Ready</h4>
-        <p>Tap to pay, enter transport gates, or scan into events – all with one powerful card.</p>
-      </div>
+    <div class="fingerprint" onclick="unlockCard()"></div>
+
+    <div class="category-buttons" id="card-options" style="display:none;">
+      <button onclick="selectType('debit')">Debit</button>
+      <button onclick="selectType('credit')">Credit</button>
+      <button onclick="selectType('other')">Other</button>
     </div>
-  </section>
 
-  <footer>
-    <p>Crafted with 💗 by Team CardX for the Hackathon</p>
-  </footer>
+    <button id="switchBtn" style="display:none;" onclick="switchCard()">Switch Card</button>
+  </div>
 
   <script src="script.js"></script>
 </body>
